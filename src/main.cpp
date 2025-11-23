@@ -5,7 +5,6 @@
 #include "hander/GameManager.h"
 
 
-
 int main(int argc, char** argv)
 {
 	return GameManager::Instance()->RunGame(argc, argv);
