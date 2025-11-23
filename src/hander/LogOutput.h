@@ -10,6 +10,7 @@
 
 class LogOutput {
 public:
+
     static void PrintfCurrentTime() {
         time_t CurrentTime;
         time(&CurrentTime);

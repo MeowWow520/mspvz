@@ -15,6 +15,9 @@
     <ClInclude Include="F:\mspvz\src\hander\SingletonInstanceTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="F:\mspvz\src\hander\ResourcesManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\mspvz\CMakeLists.txt" />

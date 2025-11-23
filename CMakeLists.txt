@@ -27,6 +27,7 @@ add_executable(${TARGET}
                         "src/hander/GameManager.h"
                         "src/hander/LogOutput.h"
                         "src/hander/SingletonInstanceTemplate.h"
+                        "src/hander/ResourcesManager.h"
                         )
 
 

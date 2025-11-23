@@ -8,6 +8,7 @@
 #include <SDL_mixer.h>
 #include <SDL_image.h>
 #include "SingletonInstanceTemplate.h"
+#include "ResourcesManager.h"
 #include "LogOutput.h"
 
 
@@ -18,23 +19,22 @@ public:
 	int RunGame(int argc, char** argv) {
 		(void)argc;
 		(void)argv;
+		// Load resources
+
 		// Main loop
 		while (IsProjectRunning) {
 			// Input event
 			while (SDL_PollEvent(&SDLEvent)) { On_Input(); }
 			LimitFrameRate();
-			On_Updata();
-
-			// Set and Clear screen
-			SDL_SetRenderDrawColor(SDLRenderer, 0, 0, 0, 255);
-			SDL_RenderClear(SDLRenderer);
-
+			ClearScreen();
 			// Draw;
-			On_Renderer();
 			SDL_RenderPresent(SDLRenderer);
 		}
+		
+		// Function Return Value
 		return 0;
 	}
+	
 protected:
 	GameManager() {
 		// SDL initialization and assertion for each library 
@@ -62,7 +62,9 @@ protected:
 		IMG_Quit();
 		SDL_Quit();
 	};
+
 private:
+	// Declaration of private member
 	bool IsProjectRunning = true;
 	const double COMPARE_DELTA = (double)(1000.0 / 60.0);
 	Uint64 Last_Counter = SDL_GetPerformanceCounter();
@@ -71,8 +73,9 @@ private:
 	SDL_Point PosCursor = { 0,0 };
 	SDL_Window* SDLWindow = nullptr;
 	SDL_Renderer* SDLRenderer = nullptr;
-	void SDL_Init_Assert(bool flag, const char* c_Init_Type) {
 
+	// Declaration of private function
+	void SDL_Init_Assert(bool flag, const char* c_Init_Type) {
 		if (flag) {
 			LogOutput::PrintfCurrentTime();
 			const std::string STR_LOADING_SUCCESSFUL_MSG = u8"loading successfully!";
@@ -82,14 +85,30 @@ private:
 		const char LAOD_ERROR_MSG[24] = u8"SDL Library Load Error!";
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, LAOD_ERROR_MSG, c_Init_Type, SDLWindow);
 	}
-	void On_Input() {}
-	void On_Updata() {}
-	void On_Renderer() {}
+	void ClearScreen() {
+		SDL_SetRenderDrawColor(SDLRenderer, 0, 0, 0, 255);
+		SDL_RenderClear(SDLRenderer);
+	}
 	void LimitFrameRate() {
 		Uint64 Current_Counter = SDL_GetPerformanceCounter();
 		double Detla = (double)(Current_Counter - Last_Counter) / COUNTER_FREQUENCY;
 		Last_Counter = Current_Counter;
 		if (Detla * 1000 < COMPARE_DELTA) SDL_Delay((Uint32)(COMPARE_DELTA - Detla * 1000));
 	}
+	void On_Input() {
+		switch (SDLEvent.type) {
+			// Quit event
+		    case SDL_QUIT:
+				IsProjectRunning = false;
+				break;
+			// Mouse button event
+		    case SDL_MOUSEMOTION:
+				PosCursor.x = SDLEvent.motion.x;
+				PosCursor.y = SDLEvent.motion.y;
+				break;
+		}
+	}
+	void On_Updata() {}
+	void On_Renderer() {}
 };
 #endif // !GAMEMANAGER_H
