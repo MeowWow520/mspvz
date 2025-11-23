@@ -1,0 +1,3 @@
+# Init .gitignore file
+# This file is used to ignore files and directories that should not be tracked by git.
+# For example, you can add files that contain sensitive information, such as passwords or API keys.
