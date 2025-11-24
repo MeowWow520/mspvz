@@ -1,0 +1,8 @@
+[
+{
+  "directory": "F:/mspvz/build",
+  "command": "F:\\MSVC\\VC\\Tools\\MSVC\\14.50.35717\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -external:IF:\\SDL2\\cmake\\..\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /W4 /FoCMakeFiles\\mspvz_Windows.dir\\src\\main.cpp.obj /FdCMakeFiles\\mspvz_Windows.dir\\ /FS -c F:\\mspvz\\src\\main.cpp",
+  "file": "F:/mspvz/src/main.cpp",
+  "output": "F:/mspvz/build/CMakeFiles/mspvz_Windows.dir/src/main.cpp.obj"
+}
+]

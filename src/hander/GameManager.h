@@ -8,9 +8,7 @@
 #include <SDL_mixer.h>
 #include <SDL_image.h>
 #include "SingletonInstanceTemplate.h"
-#include "ResourcesManager.h"
 #include "LogOutput.h"
-
 
 
 class GameManager : public Manager<GameManager> {
@@ -25,12 +23,10 @@ public:
 		while (IsProjectRunning) {
 			// Input event
 			while (SDL_PollEvent(&SDLEvent)) { On_Input(); }
-			LimitFrameRate();
-			ClearScreen();
+			On_Updata();
 			// Draw;
 			SDL_RenderPresent(SDLRenderer);
 		}
-		
 		// Function Return Value
 		return 0;
 	}
@@ -78,12 +74,12 @@ private:
 	void SDL_Init_Assert(bool flag, const char* c_Init_Type) {
 		if (flag) {
 			LogOutput::PrintfCurrentTime();
-			const std::string STR_LOADING_SUCCESSFUL_MSG = u8"loading successfully!";
-			std::cout << c_Init_Type << " " << STR_LOADING_SUCCESSFUL_MSG << std::endl;
+			const std::string SDLLIB_SUCCESSFUL_MSG = u8"loading successfully!";
+			std::cout << c_Init_Type << " " << SDLLIB_SUCCESSFUL_MSG << std::endl;
 			return;
 		}
-		const char LAOD_ERROR_MSG[24] = u8"SDL Library Load Error!";
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, LAOD_ERROR_MSG, c_Init_Type, SDLWindow);
+		const char SDLLIB_ERROR_MSG[24] = u8"SDL Library Load Error!";
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, SDLLIB_ERROR_MSG, c_Init_Type, SDLWindow);
 	}
 	void ClearScreen() {
 		SDL_SetRenderDrawColor(SDLRenderer, 0, 0, 0, 255);
@@ -108,7 +104,10 @@ private:
 				break;
 		}
 	}
-	void On_Updata() {}
-	void On_Renderer() {}
+	void On_Updata() {
+		LimitFrameRate();
+		ClearScreen();
+	}
+	
 };
 #endif // !GAMEMANAGER_H

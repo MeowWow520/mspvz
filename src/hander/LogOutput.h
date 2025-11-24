@@ -10,7 +10,6 @@
 
 class LogOutput {
 public:
-
     static void PrintfCurrentTime() {
         time_t CurrentTime;
         time(&CurrentTime);
@@ -18,9 +17,12 @@ public:
         String_CurrentTime.erase(std::remove(String_CurrentTime.begin(), String_CurrentTime.end(), '\n'), String_CurrentTime.end());
         std::cout << "[" + String_CurrentTime + "]  ";
     }
+
 protected:
     LogOutput() = default;
     ~LogOutput() = default;
+
 private:
+
 };
 #endif // !LOGOUTPUT_H
