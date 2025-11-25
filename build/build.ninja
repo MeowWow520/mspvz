@@ -52,9 +52,18 @@ build cmake_object_order_depends_target_mspvz_Windows: phony || .
 build CMakeFiles\mspvz_Windows.dir\src\main.cpp.obj: CXX_COMPILER__mspvz_Windows_unscanned_Debug F$:\mspvz\src\main.cpp || cmake_object_order_depends_target_mspvz_Windows
   CONFIG = Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /W4
-  INCLUDES = -external:IF:\SDL2\cmake\..\include -external:W0
+  INCLUDES = -IF:\mspvz\src\cJSON\include -external:IF:\SDL2\cmake\..\include -external:W0
   OBJECT_DIR = CMakeFiles\mspvz_Windows.dir
   OBJECT_FILE_DIR = CMakeFiles\mspvz_Windows.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\mspvz_Windows.dir\
+  TARGET_PDB = F:\mspvz\mspvz_Windows.pdb
+
+build CMakeFiles\mspvz_Windows.dir\src\cJSON\cJSON.c.obj: C_COMPILER__mspvz_Windows_unscanned_Debug F$:\mspvz\src\cJSON\cJSON.c || cmake_object_order_depends_target_mspvz_Windows
+  CONFIG = Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W4
+  INCLUDES = -IF:\mspvz\src\cJSON\include -external:IF:\SDL2\cmake\..\include -external:W0
+  OBJECT_DIR = CMakeFiles\mspvz_Windows.dir
+  OBJECT_FILE_DIR = CMakeFiles\mspvz_Windows.dir\src\cJSON
   TARGET_COMPILE_PDB = CMakeFiles\mspvz_Windows.dir\
   TARGET_PDB = F:\mspvz\mspvz_Windows.pdb
 
@@ -66,7 +75,7 @@ build CMakeFiles\mspvz_Windows.dir\src\main.cpp.obj: CXX_COMPILER__mspvz_Windows
 #############################################
 # Link the executable F:\mspvz\mspvz_Windows.exe
 
-build F$:\mspvz\mspvz_Windows.exe: CXX_EXECUTABLE_LINKER__mspvz_Windows_Debug CMakeFiles\mspvz_Windows.dir\src\main.cpp.obj | F$:\SDL2\cmake\..\lib\x64\SDL2.lib F$:\SDL2\cmake\..\lib\x64\SDL2_image.lib F$:\SDL2\cmake\..\lib\x64\SDL2_mixer.lib F$:\SDL2\cmake\..\lib\x64\SDL2_ttf.lib F$:\SDL2\cmake\..\lib\x64\SDL2main.lib
+build F$:\mspvz\mspvz_Windows.exe: CXX_EXECUTABLE_LINKER__mspvz_Windows_Debug CMakeFiles\mspvz_Windows.dir\src\main.cpp.obj CMakeFiles\mspvz_Windows.dir\src\cJSON\cJSON.c.obj | F$:\SDL2\cmake\..\lib\x64\SDL2.lib F$:\SDL2\cmake\..\lib\x64\SDL2_image.lib F$:\SDL2\cmake\..\lib\x64\SDL2_mixer.lib F$:\SDL2\cmake\..\lib\x64\SDL2_ttf.lib F$:\SDL2\cmake\..\lib\x64\SDL2main.lib
   CONFIG = Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console

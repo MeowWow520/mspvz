@@ -43,10 +43,17 @@ protected:
 		// SDL_image settings 
 		SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
 		// Create and assert SDL window 
-		SDLWindow = SDL_CreateWindow(u8"MeowWow520's Plants v.s. Zombies", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1980, 1080, SDL_WINDOW_SHOWN);
+		SDLWindow = SDL_CreateWindow(u8"MeowWow520's Plants v.s. Zombies", 
+			SDL_WINDOWPOS_CENTERED, 
+			SDL_WINDOWPOS_CENTERED, 
+			WindowWidth, WindowHeight, 
+			SDL_WINDOW_SHOWN);
 		SDL_Init_Assert(SDLWindow, u8"SDL Window");
 		// Create and assert SDL renderer
-		SDLRenderer = SDL_CreateRenderer(SDLWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
+		SDLRenderer = SDL_CreateRenderer(SDLWindow, -1, 
+			SDL_RENDERER_ACCELERATED | 
+			SDL_RENDERER_PRESENTVSYNC | 
+			SDL_RENDERER_TARGETTEXTURE);
 		SDL_Init_Assert(SDLRenderer, u8"SDL Renderer");
 	};
 	~GameManager() {
@@ -61,6 +68,8 @@ protected:
 
 private:
 	// Declaration of private member
+	int WindowWidth{1280};
+	int WindowHeight{720};
 	bool IsProjectRunning = true;
 	const double COMPARE_DELTA = (double)(1000.0 / 60.0);
 	Uint64 Last_Counter = SDL_GetPerformanceCounter();

@@ -23,6 +23,6 @@ protected:
     ~LogOutput() = default;
 
 private:
-
+    
 };
 #endif // !LOGOUTPUT_H

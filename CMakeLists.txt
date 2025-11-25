@@ -22,12 +22,20 @@ find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
 # Add New Include Path
-add_executable(${TARGET} 
+add_executable(${TARGET}
                         "src/main.cpp"
                         "src/hander/GameManager.h"
                         "src/hander/LogOutput.h"
                         "src/hander/SingletonInstanceTemplate.h"
+                        "src/cJSON/cJSON.c"
+                        "src/hander/StructTile.h"
+                        "src/hander/Map.h"
                         )
+
+
+target_include_directories(${TARGET} PRIVATE 
+                        "src/cJSON/include"
+                        )               
 
 
 # Find libs
