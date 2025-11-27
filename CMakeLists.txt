@@ -24,12 +24,16 @@ find_package(SDL2_ttf REQUIRED)
 # Add New Include Path
 add_executable(${TARGET}
                         "src/main.cpp"
-                        "src/hander/GameManager.h"
-                        "src/hander/LogOutput.h"
-                        "src/hander/SingletonInstanceTemplate.h"
                         "src/cJSON/cJSON.c"
+                        "src/hander/LogOutput.h"
                         "src/hander/StructTile.h"
                         "src/hander/Map.h"
+                        "src/hander/Route.h"
+                        "src/hander/Wave.h"
+                        "src/hander/Enemy/EnemyType.h"
+                        "src/hander/Manager/GameManager.h"
+                        "src/hander/Manager/SingletonInstanceTemplate.h"
+                        "src/hander/Manager/ConfigManager.h"
                         )
 
 

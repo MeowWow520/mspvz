@@ -2,7 +2,7 @@
 #define SDL_MAIN_HANDLED
 
 
-#include "hander/GameManager.h"
+#include "hander/Manager/GameManager.h"
 
 
 

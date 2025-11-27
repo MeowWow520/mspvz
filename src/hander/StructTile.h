@@ -7,7 +7,7 @@
 
 // This is the pixel size of each tile
 #define TILE_SIZE 48;
-struct Tile {
+struct _Tile {
     /*  Every tile has a position
      *  Which mark the direction of the enemy
      */
@@ -32,7 +32,7 @@ struct Tile {
     /*  Has_Plants mark is this tile has a plant
      *  If it has, then it will be true
      */
-    bool Has_Plants{false};
+    bool HasPlants{false};
     EnumDirection Direction{EnumDirection::NONE};
 };
 
@@ -40,5 +40,5 @@ struct Tile {
  *  It is a 2D vector
  *  I typedef it TileMap
  */ 
-typedef std::vector<std::vector<Tile>> TileMap;
+typedef std::vector<std::vector<_Tile>> TileMap;
 #endif // !STRUCTTILE_H

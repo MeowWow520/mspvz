@@ -8,11 +8,12 @@
 #include <SDL_mixer.h>
 #include <SDL_image.h>
 #include "SingletonInstanceTemplate.h"
-#include "LogOutput.h"
+#include "../LogOutput.h"
 
 
-class GameManager : public Manager<GameManager> {
-	friend class Manager<GameManager>;
+class GameManager : public SITemplate<GameManager> {
+	friend class SITemplate<GameManager>;
+
 public:
 	int RunGame(int argc, char** argv) {
 		(void)argc;
@@ -34,10 +35,10 @@ public:
 protected:
 	GameManager() {
 		// SDL initialization and assertion for each library 
-		SDL_Init_Assert(!SDL_Init(SDL_INIT_EVERYTHING), u8"SDL");
-		SDL_Init_Assert(IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG), u8"SDL_image");
-		SDL_Init_Assert(Mix_Init(MIX_INIT_MP3), u8"SDL_Mixer");
-		SDL_Init_Assert(!TTF_Init(), u8"SDL_TTF");
+		SDLInitAssert(!SDL_Init(SDL_INIT_EVERYTHING), u8"SDL");
+		SDLInitAssert(IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG), u8"SDL_image");
+		SDLInitAssert(Mix_Init(MIX_INIT_MP3), u8"SDL_Mixer");
+		SDLInitAssert(!TTF_Init(), u8"SDL_TTF");
 		// SDL_mixer audio settings
 		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 		// SDL_image settings 
@@ -48,13 +49,13 @@ protected:
 			SDL_WINDOWPOS_CENTERED, 
 			WindowWidth, WindowHeight, 
 			SDL_WINDOW_SHOWN);
-		SDL_Init_Assert(SDLWindow, u8"SDL Window");
+		SDLInitAssert(SDLWindow, u8"SDL Window");
 		// Create and assert SDL renderer
 		SDLRenderer = SDL_CreateRenderer(SDLWindow, -1, 
 			SDL_RENDERER_ACCELERATED | 
 			SDL_RENDERER_PRESENTVSYNC | 
 			SDL_RENDERER_TARGETTEXTURE);
-		SDL_Init_Assert(SDLRenderer, u8"SDL Renderer");
+		SDLInitAssert(SDLRenderer, u8"SDL Renderer");
 	};
 	~GameManager() {
 		// SDL library quit
@@ -71,34 +72,34 @@ private:
 	int WindowWidth{1280};
 	int WindowHeight{720};
 	bool IsProjectRunning = true;
-	const double COMPARE_DELTA = (double)(1000.0 / 60.0);
-	Uint64 Last_Counter = SDL_GetPerformanceCounter();
-	const Uint64 COUNTER_FREQUENCY = SDL_GetPerformanceCounter();
+	const double CompareDelta = (double)(1000.0 / 60.0);
+	Uint64 LastCounter = SDL_GetPerformanceCounter();
+	const Uint64 CounterFrequency = SDL_GetPerformanceCounter();
 	SDL_Event SDLEvent;
 	SDL_Point PosCursor = { 0,0 };
 	SDL_Window* SDLWindow = nullptr;
 	SDL_Renderer* SDLRenderer = nullptr;
 
 	// Declaration of private function
-	void SDL_Init_Assert(bool flag, const char* c_Init_Type) {
+	void SDLInitAssert(bool flag, const char* InitType) {
 		if (flag) {
 			LogOutput::PrintfCurrentTime();
-			const std::string SDLLIB_SUCCESSFUL_MSG = u8"loading successfully!";
-			std::cout << c_Init_Type << " " << SDLLIB_SUCCESSFUL_MSG << std::endl;
+			const std::string SDLllbSuccessfulMsg = u8"loading successfully!";
+			std::cout << InitType << " " << SDLllbSuccessfulMsg << std::endl;
 			return;
 		}
-		const char SDLLIB_ERROR_MSG[24] = u8"SDL Library Load Error!";
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, SDLLIB_ERROR_MSG, c_Init_Type, SDLWindow);
+		const char SDLlibErrorMsg[24] = u8"SDL Library Load Error!";
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, SDLlibErrorMsg, InitType, SDLWindow);
 	}
 	void ClearScreen() {
 		SDL_SetRenderDrawColor(SDLRenderer, 0, 0, 0, 255);
 		SDL_RenderClear(SDLRenderer);
 	}
 	void LimitFrameRate() {
-		Uint64 Current_Counter = SDL_GetPerformanceCounter();
-		double Detla = (double)(Current_Counter - Last_Counter) / COUNTER_FREQUENCY;
-		Last_Counter = Current_Counter;
-		if (Detla * 1000 < COMPARE_DELTA) SDL_Delay((Uint32)(COMPARE_DELTA - Detla * 1000));
+		Uint64 CurrentCounter = SDL_GetPerformanceCounter();
+		double Detla = (double)(CurrentCounter - LastCounter) / CounterFrequency;
+		LastCounter = CurrentCounter;
+		if (Detla * 1000 < CompareDelta) SDL_Delay((Uint32)(CompareDelta - Detla * 1000));
 	}
 	void On_Input() {
 		switch (SDLEvent.type) {
