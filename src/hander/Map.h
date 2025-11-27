@@ -38,12 +38,10 @@ public:
         Map_File.close();
         if (Tile_Map_Temp.empty() || Tile_Map_Temp[0].empty()) return false;
         Tile_Map = Tile_Map_Temp;
-        return true;
-    };
+        return true;};
     size_t GetWidth() const { 
         if (Tile_Map.empty()) return 0;
-        return Tile_Map[0].size(); 
-    }
+        return Tile_Map[0].size(); }
     size_t GetHeight() const { return Tile_Map.size(); }
 protected:
     Map() = default;
