@@ -11,6 +11,12 @@
 #include "../LogOutput.h"
 
 
+
+/** GameManager.h 定义了游戏管理器
+ * 
+ *  该类负责初始化各个 SDL 库，引入其他类实现游戏功能。
+ * 	该类为单例模式
+ */
 class GameManager : public SITemplate<GameManager> {
 	friend class SITemplate<GameManager>;
 

@@ -12,15 +12,19 @@
 #include "Route.h"
 
 
+
 class Map {
 
 public:
     Map() = default;
     ~Map() = default;
-
-    typedef std::unordered_map<int, Route> SpawnerRoutePool;
-
+    // 宏定义 -- 把一条条怪物路线存入一个哈希表
+    typedef std::unordered_map<int, Route> _SpawnerRoutePool;
+    // 函数 -- 从文件中加载地图
     bool Load(const std::string& Map_Path) {
+        // Map_Path 为地图文件路径
+
+        // 打开文件
         std::ifstream Map_File(Map_Path);
         if (!Map_File.good()) return false;
         TileMap Tile_Map_Temp;
@@ -29,6 +33,7 @@ public:
         std::string String_Line;
         while (std::getline(Map_File, String_Line)) {
             String_Line = Trim_String(String_Line);
+            // 判断 -- 如果是空行，则跳过
             if (String_Line.empty()) continue;
             Index_X = -1, Index_Y++;
             Tile_Map_Temp.emplace_back();
@@ -41,22 +46,28 @@ public:
                 LoadTileFromString(Tile_Map, String_Tile);
             }
         }
-
+        // 关闭文件
         Map_File.close();
         if (Tile_Map_Temp.empty() || Tile_Map_Temp[0].empty()) return false;
         Tile_Map = Tile_Map_Temp;
         GenerateMapCache();
         return true;
     };
+    // 函数 -- 获取地图的宽高
     size_t GetWidth() const { 
         if (Tile_Map.empty()) return 0;
         return Tile_Map[0].size();
     }
+    // 函数 -- 获取地图的高度
     size_t GetHeight() const { return Tile_Map.size(); }
+    // 函数 -- 获取地图
     const TileMap& GetTileMap() const { return Tile_Map; }
+    // 函数 -- 获取守卫家的索引坐标
     const SDL_Point& GetHomeIndex() const { return Index_Home; }
-    const SpawnerRoutePool& GetSpawnerRoutePool() const
-        { return Spawner_Route_Pool; }
+    // 函数 -- 获取生成器路线池
+    const _SpawnerRoutePool& GetSpawnerRoutePool() const
+        { return SpawnerRoutePool; }
+    // 函数 -- 放置塔，把瓦片的 HasPlants 属性设为 true
     void PlaceTower (const SDL_Point& Index_Tile) 
         { Tile_Map[Index_Tile.y][Index_Tile.x].HasPlants = true; }
 
@@ -64,14 +75,19 @@ protected:
 
 private:
     TileMap Tile_Map;
+    // 变量 -- 守卫家的索引坐标
     SDL_Point Index_Home{ 0 };
-    SpawnerRoutePool Spawner_Route_Pool;
+    // 变量 -- 生成器路线池
+    _SpawnerRoutePool SpawnerRoutePool;
+    // 字符串函数 -- 去除字符串两端的空格
     std::string Trim_String(const std::string& str) {
         size_t Begin_Index = str.find_first_not_of(" \t");
+        // 如果字符串全是空格，则返回空字符串
         if (Begin_Index == std::string::npos) return "";
         size_t End_Index = str.find_last_not_of(" \t");
         return str.substr(Begin_Index, (End_Index - Begin_Index + 1));
     }
+    // 函数 -- 从字符串中加载瓦片
     void LoadTileFromString(_Tile& Tile_Map, const std::string& String) {
         std::string String_Tidy = Trim_String(String);
         std::string String_Value;
@@ -88,6 +104,7 @@ private:
         Tile_Map.Direction = (_Tile::EnumDirection) ((Values.size() < 3 || Values[2] < 0) ? -1 : Values[2]);
         Tile_Map.SpecialFlag = (Values.size() <= 3) ? -1 : Values[3];
     }
+    // 函数 -- 生成地图缓存
     void GenerateMapCache() {
         for (int y = 0; y < GetHeight(); y++) {
             for (int x = 0; x < GetWidth(); x++) {
@@ -97,7 +114,7 @@ private:
                     Index_Home.x = x;
                     Index_Home.y = y;
                 }
-                else Spawner_Route_Pool[Tile.SpecialFlag] = Route(Tile_Map, { x, y });
+                else SpawnerRoutePool[Tile.SpecialFlag] = Route(Tile_Map, { x, y });
 
             }
         }

@@ -8,10 +8,14 @@
 #include "Map.h"
 
 
+
+/** Route.h 
+ * 
+ */
 class Route {
 
 public:
-    typedef std::vector<SDL_Point> IndexList;
+    typedef std::vector<SDL_Point> _IndexList;
     Route() = default;
     Route(const TileMap& Map, const SDL_Point& Index_Origin) {
         size_t MapWidth = Map[0].size();
@@ -19,12 +23,13 @@ public:
         SDL_Point Index_Next = Index_Origin;
 
         while (true) {
-            // is out-of-map
+            // 判断是否超出地图边界
             if (Index_Next.x >= MapWidth || Index_Next.y >= MapHeight)
                 break;
-            // next tile direction unexist
+            // 判断是否闭合造成死循环
             if (ChackDuplicateIndex(Index_Next)) break;
-            else Index_List.push_back(Index_Next);
+            else IndexList.push_back(Index_Next);
+            // 布尔值 -- 判断下一个位置是否存在
             bool Is_Next_Exist{true};
             const _Tile& Tile = Map[Index_Next.y][Index_Next.x];
             if (Tile.SpecialFlag == 0) break;
@@ -51,15 +56,17 @@ public:
     };
 
     ~Route() = default;
-    const IndexList& GetIndexList() const { return Index_List; }
+    // 函数 -- 获取路径
+    const _IndexList& GetIndexList() const { return IndexList; }
 
 protected:
 
 
 private:
-    IndexList Index_List;
+    _IndexList IndexList;
+    // 函数 -- 检查闭合路线
     bool ChackDuplicateIndex(const SDL_Point& Target_Index) {
-        for (const SDL_Point& Index : Index_List) {
+        for (const SDL_Point& Index : IndexList) {
             if (Index.x == Target_Index.x && Index.y == Target_Index.y) 
                 return true;
         }

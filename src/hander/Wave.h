@@ -6,6 +6,10 @@
 #include "Enemy/EnemyType.h"
 
 
+
+/** Wave.h 
+ * 
+ */
 struct Wave {
 
     struct SpawnEvent { 
