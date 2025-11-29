@@ -1,9 +1,6 @@
 # ninja log v6
-26	163	7860938816445616	CMakeFiles/mspvz_Windows.dir/src/cJSON/cJSON.c.obj	21dd90427d2c8eae
-1173	1332	7860953568575049	F:/mspvz/mspvz_Windows.exe	96cfd05d6cc3ac05
-22	1172	7860953557073023	CMakeFiles/mspvz_Windows.dir/src/main.cpp.obj	13ab2cc6314f72ef
-6	168	7860956248190988	build.ninja	7e3cbb4191633c81
-6	168	7860956248190988	F:/mspvz/build/cmake_install.cmake	7e3cbb4191633c81
 27	162	7860956248796599	CMakeFiles/mspvz_Windows.dir/src/cJSON/cJSON.c.obj	bbf65ad61988dd03
-22	537	7860956248746532	CMakeFiles/mspvz_Windows.dir/src/main.cpp.obj	f29e4850e2adfcd8
 537	692	7860956253896676	F:/mspvz/mspvz_Windows.exe	96cfd05d6cc3ac05
+22	537	7860956248746532	CMakeFiles/mspvz_Windows.dir/src/main.cpp.obj	f29e4850e2adfcd8
+6	168	7860963338562042	build.ninja	7e3cbb4191633c81
+6	168	7860963338486755	F:/mspvz/build/cmake_install.cmake	7e3cbb4191633c81
