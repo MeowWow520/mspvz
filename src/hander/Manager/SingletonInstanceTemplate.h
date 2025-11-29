@@ -21,8 +21,8 @@ protected:
 	SITemplate() = default;
 	~SITemplate() = default;
 	SITemplate(const SITemplate&) = delete;
-	SITemplate& Operator=(const SITemplate&) = delete;
-	
+	SITemplate& operator=(const SITemplate&) = delete;
+	 
 private:
 	static T* _Sitemplate;
 };

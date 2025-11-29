@@ -2,6 +2,10 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(mspvz VERSION 0.1.0 LANGUAGES C CXX)
 
+if (MSVC)
+   add_compile_options("/source-charset:utf-8" "/execution-charset:utf-8")
+endif()
+
 # Set C++ Standard To 17
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)

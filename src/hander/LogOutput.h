@@ -30,7 +30,7 @@ public:
             ),
             StringCurrentTime.end()
         );
-        std::cout << '[' + StringCurrentTime + "]  ";
+        std::cout << "[" + StringCurrentTime + "]  ";
     }
 
 protected:

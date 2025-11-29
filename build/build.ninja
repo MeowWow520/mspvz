@@ -12,7 +12,7 @@
 
 # =============================================================================
 # Project: mspvz
-# Configurations: Debug
+# Configurations: Release
 # =============================================================================
 
 #############################################
@@ -24,7 +24,7 @@ ninja_required_version = 1.5
 #############################################
 # Set configuration variable for custom commands.
 
-CONFIGURATION = Debug
+CONFIGURATION = Release
 # =============================================================================
 # Include auxiliary files.
 
@@ -49,18 +49,18 @@ cmake_ninja_workdir = F$:\mspvz\build\
 
 build cmake_object_order_depends_target_mspvz_Windows: phony || .
 
-build CMakeFiles\mspvz_Windows.dir\src\main.cpp.obj: CXX_COMPILER__mspvz_Windows_unscanned_Debug F$:\mspvz\src\main.cpp || cmake_object_order_depends_target_mspvz_Windows
-  CONFIG = Debug
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /W4
+build CMakeFiles\mspvz_Windows.dir\src\main.cpp.obj: CXX_COMPILER__mspvz_Windows_unscanned_Release F$:\mspvz\src\main.cpp || cmake_object_order_depends_target_mspvz_Windows
+  CONFIG = Release
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG -std:c++17 /source-charset:utf-8 /execution-charset:utf-8 /W4
   INCLUDES = -IF:\mspvz\src\cJSON\include -external:IF:\SDL2\cmake\..\include -external:W0
   OBJECT_DIR = CMakeFiles\mspvz_Windows.dir
   OBJECT_FILE_DIR = CMakeFiles\mspvz_Windows.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\mspvz_Windows.dir\
   TARGET_PDB = F:\mspvz\mspvz_Windows.pdb
 
-build CMakeFiles\mspvz_Windows.dir\src\cJSON\cJSON.c.obj: C_COMPILER__mspvz_Windows_unscanned_Debug F$:\mspvz\src\cJSON\cJSON.c || cmake_object_order_depends_target_mspvz_Windows
-  CONFIG = Debug
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W4
+build CMakeFiles\mspvz_Windows.dir\src\cJSON\cJSON.c.obj: C_COMPILER__mspvz_Windows_unscanned_Release F$:\mspvz\src\cJSON\cJSON.c || cmake_object_order_depends_target_mspvz_Windows
+  CONFIG = Release
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MD /O2 /Ob2 /DNDEBUG /source-charset:utf-8 /execution-charset:utf-8 /W4
   INCLUDES = -IF:\mspvz\src\cJSON\include -external:IF:\SDL2\cmake\..\include -external:W0
   OBJECT_DIR = CMakeFiles\mspvz_Windows.dir
   OBJECT_FILE_DIR = CMakeFiles\mspvz_Windows.dir\src\cJSON
@@ -75,10 +75,10 @@ build CMakeFiles\mspvz_Windows.dir\src\cJSON\cJSON.c.obj: C_COMPILER__mspvz_Wind
 #############################################
 # Link the executable F:\mspvz\mspvz_Windows.exe
 
-build F$:\mspvz\mspvz_Windows.exe: CXX_EXECUTABLE_LINKER__mspvz_Windows_Debug CMakeFiles\mspvz_Windows.dir\src\main.cpp.obj CMakeFiles\mspvz_Windows.dir\src\cJSON\cJSON.c.obj | F$:\SDL2\cmake\..\lib\x64\SDL2.lib F$:\SDL2\cmake\..\lib\x64\SDL2_image.lib F$:\SDL2\cmake\..\lib\x64\SDL2_mixer.lib F$:\SDL2\cmake\..\lib\x64\SDL2_ttf.lib F$:\SDL2\cmake\..\lib\x64\SDL2main.lib
-  CONFIG = Debug
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
-  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+build F$:\mspvz\mspvz_Windows.exe: CXX_EXECUTABLE_LINKER__mspvz_Windows_Release CMakeFiles\mspvz_Windows.dir\src\main.cpp.obj CMakeFiles\mspvz_Windows.dir\src\cJSON\cJSON.c.obj | F$:\SDL2\cmake\..\lib\x64\SDL2.lib F$:\SDL2\cmake\..\lib\x64\SDL2_image.lib F$:\SDL2\cmake\..\lib\x64\SDL2_mixer.lib F$:\SDL2\cmake\..\lib\x64\SDL2_ttf.lib F$:\SDL2\cmake\..\lib\x64\SDL2main.lib
+  CONFIG = Release
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG
+  LINK_FLAGS = /machine:x64 /INCREMENTAL:NO /subsystem:console
   LINK_LIBRARIES = F:\SDL2\cmake\..\lib\x64\SDL2.lib  F:\SDL2\cmake\..\lib\x64\SDL2_image.lib  F:\SDL2\cmake\..\lib\x64\SDL2_mixer.lib  F:\SDL2\cmake\..\lib\x64\SDL2_ttf.lib  F:\SDL2\cmake\..\lib\x64\SDL2main.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\mspvz_Windows.dir
   POST_BUILD = cd .

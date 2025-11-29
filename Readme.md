@@ -15,6 +15,9 @@
     - SDL_ttf: 2.24.0
     - SDL2: 2.32.10
 
+### Encoding
+- **UTF-8 With BOM**
+
 ## CC BY-NC-SA 4.0
 **You are free to:**
 - **Share** — copy and redistribute the material in any medium or format

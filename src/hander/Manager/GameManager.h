@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
@@ -24,17 +24,11 @@ public:
 	int RunGame(int argc, char** argv) {
 		(void)argc;
 		(void)argv;
-		// Load resources
-
-		// Main loop
 		while (IsProjectRunning) {
-			// Input event
 			while (SDL_PollEvent(&SDLEvent)) { On_Input(); }
 			On_Updata();
-			// Draw;
 			SDL_RenderPresent(SDLRenderer);
 		}
-		// Function Return Value
 		return 0;
 	}
 	
@@ -74,7 +68,6 @@ protected:
 	};
 
 private:
-	// Declaration of private member
 	int WindowWidth{1280};
 	int WindowHeight{720};
 	bool IsProjectRunning = true;
@@ -86,7 +79,6 @@ private:
 	SDL_Window* SDLWindow = nullptr;
 	SDL_Renderer* SDLRenderer = nullptr;
 
-	// Declaration of private function
 	void SDLInitAssert(bool flag, const char* InitType) {
 		if (flag) {
 			LogOutput::PrintfCurrentTime();

@@ -1,13 +1,13 @@
 [
 {
   "directory": "F:/mspvz/build",
-  "command": "F:\\MSVC\\VC\\Tools\\MSVC\\14.50.35717\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -IF:\\mspvz\\src\\cJSON\\include -external:IF:\\SDL2\\cmake\\..\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /W4 /FoCMakeFiles\\mspvz_Windows.dir\\src\\main.cpp.obj /FdCMakeFiles\\mspvz_Windows.dir\\ /FS -c F:\\mspvz\\src\\main.cpp",
+  "command": "F:\\MSVC\\VC\\Tools\\MSVC\\14.50.35717\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -IF:\\mspvz\\src\\cJSON\\include -external:IF:\\SDL2\\cmake\\..\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG -std:c++17 /source-charset:utf-8 /execution-charset:utf-8 /W4 /FoCMakeFiles\\mspvz_Windows.dir\\src\\main.cpp.obj /FdCMakeFiles\\mspvz_Windows.dir\\ /FS -c F:\\mspvz\\src\\main.cpp",
   "file": "F:/mspvz/src/main.cpp",
   "output": "F:/mspvz/build/CMakeFiles/mspvz_Windows.dir/src/main.cpp.obj"
 },
 {
   "directory": "F:/mspvz/build",
-  "command": "F:\\MSVC\\VC\\Tools\\MSVC\\14.50.35717\\bin\\Hostx64\\x64\\cl.exe  /nologo -IF:\\mspvz\\src\\cJSON\\include -external:IF:\\SDL2\\cmake\\..\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W4 /FoCMakeFiles\\mspvz_Windows.dir\\src\\cJSON\\cJSON.c.obj /FdCMakeFiles\\mspvz_Windows.dir\\ /FS -c F:\\mspvz\\src\\cJSON\\cJSON.c",
+  "command": "F:\\MSVC\\VC\\Tools\\MSVC\\14.50.35717\\bin\\Hostx64\\x64\\cl.exe  /nologo -IF:\\mspvz\\src\\cJSON\\include -external:IF:\\SDL2\\cmake\\..\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /MD /O2 /Ob2 /DNDEBUG /source-charset:utf-8 /execution-charset:utf-8 /W4 /FoCMakeFiles\\mspvz_Windows.dir\\src\\cJSON\\cJSON.c.obj /FdCMakeFiles\\mspvz_Windows.dir\\ /FS -c F:\\mspvz\\src\\cJSON\\cJSON.c",
   "file": "F:/mspvz/src/cJSON/cJSON.c",
   "output": "F:/mspvz/build/CMakeFiles/mspvz_Windows.dir/src/cJSON/cJSON.c.obj"
 }

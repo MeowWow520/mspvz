@@ -109,6 +109,7 @@ public:
     bool IsGameWin{true};
     bool IsGameOver{false};
     SDL_Rect RectTileMap{0};
+    
     // 上文结构体的实例化
     _BasicTemplate BasicTemplate;
     _PlayerTemplate PlayerTemplate;
@@ -121,6 +122,7 @@ public:
     _EnemyTemplate SilmeKingTemplate;
     _EnemyTemplate GoblinTemplate;
     _EnemyTemplate GoblinPriestTemplate;
+
     // 函数 -- 加载关卡配置文件：加载波次、敌人信息etc.
     bool LoadLevelConfig(const std::string& FilePath) {
         // 打开文件
@@ -136,19 +138,66 @@ public:
             cJSON_Delete(cJSONRoot);
             return false;
         }
+
         // 解析关卡配置
         cJSON* cJSONWave = nullptr;
         cJSON_ArrayForEach(cJSONWave, cJSONRoot) {
             if (cJSONWave->type != cJSON_Object) continue;
+
             WaveList.emplace_back();
             Wave& Wave = WaveList.back();
+
             cJSON* cJSONWaveRewards = cJSON_GetObjectItem(cJSONWave, "Rewards");
             if (cJSONWaveRewards && cJSONWaveRewards->type == cJSON_Array) {
-                
+                Wave.Rawards = cJSONWaveRewards->valuedouble;
+            }
+            cJSON* cJSONWaveInterval = cJSON_GetObjectItem(cJSONWave, "Interval");
+            if (cJSONWaveInterval && cJSONWaveInterval->type == cJSON_Number) {
+                Wave.Interval = cJSONWaveInterval->valuedouble;
+            }
+
+            cJSON* cJSONWaveSpawnList = cJSON_GetObjectItem(cJSONWave, "SpawnList");
+            if (cJSONWaveSpawnList && cJSONWaveSpawnList->type == cJSON_Array) {
+                cJSON* cJSONSpawnEvent = nullptr;
+                cJSON_ArrayForEach(cJSONSpawnEvent, cJSONWaveSpawnList) {
+                    if (cJSONSpawnEvent->type != cJSON_Object) continue;
+                    Wave::SpawnEvent& SpawnEvent = Wave.SpawnEventList.emplace_back();
+
+                    cJSON* cJSONSpawnEventInterval = cJSON_GetObjectItem(cJSONSpawnEvent, "Interval");
+                    if (cJSONSpawnEventInterval && cJSONSpawnEventInterval->type == cJSON_Number) {
+                        SpawnEvent.Interval = cJSONSpawnEventInterval->valuedouble;
+                    }
+                    cJSON* cJSONSpawnEventSpawnPoint = cJSON_GetObjectItem(cJSONSpawnEvent, "SpawnPoint");
+                    if (cJSONSpawnEventSpawnPoint && cJSONSpawnEventSpawnPoint->type == cJSON_Number) {
+                        SpawnEvent.SpawnPoint = cJSONSpawnEventSpawnPoint->valueint;
+                    }
+                    cJSON* cJSONSpawnEventEnemyType = cJSON_GetObjectItem(cJSONSpawnEvent, "_EnemyType");
+                    if (cJSONSpawnEventEnemyType && cJSONSpawnEventEnemyType->type == cJSON_String) {
+                        const std::string SpawnEventType = cJSONSpawnEventEnemyType->valuestring;
+
+                        if (SpawnEventType == "Silme")
+                            SpawnEvent._EnemyType = EnemyType::Silme;
+                        else if (SpawnEventType == "SilmeKing")
+                            SpawnEvent._EnemyType = EnemyType::SilmeKing;
+                        else if (SpawnEventType == "Goblin") 
+                            SpawnEvent._EnemyType = EnemyType::Goblin;
+                        else if (SpawnEventType == "GoblinPriest") 
+                            SpawnEvent._EnemyType = EnemyType::GoblinPriest;
+                        else if (SpawnEventType == "Skeleton")
+                            SpawnEvent._EnemyType = EnemyType::Skeleton;
+
+                    }
+                }
+                if (Wave.SpawnEventList.empty()) 
+                    WaveList.pop_back();
             }
         }
-
+        // 删除cJSONRoot
+        cJSON_Delete(cJSONRoot);
+        if (WaveList.empty()) return false;
+        return true;
     }
+
     // 函数 -- 加载游戏配置文件
     bool LoadGameConfig(const std::string& FilePath) {};
 

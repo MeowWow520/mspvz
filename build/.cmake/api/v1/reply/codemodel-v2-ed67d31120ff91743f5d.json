@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0"
@@ -19,7 +19,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "Release",
 			"projects" : 
 			[
 				{
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "mspvz_Windows::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-mspvz_Windows-Debug-800ac8503016518526f1.json",
+					"jsonFile" : "target-mspvz_Windows-Release-67961b6cf29b272ad1fc.json",
 					"name" : "mspvz_Windows",
 					"projectIndex" : 0
 				}
